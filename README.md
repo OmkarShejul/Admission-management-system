@@ -77,5 +77,5 @@ http://localhost:3000
 
 ### 👨‍💼 Developed By
 
-**SEED – SETTribe Internship Project**  
+**SEED – SETTribe Assignment**  
 © 2025 Admission System. All rights reserved.

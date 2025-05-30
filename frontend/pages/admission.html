@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admission Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body class="bg-light">
+
+  <header class="bg-primary text-white text-center py-3 mb-4 shadow">
+    <h1 class="h4 m-0">Student Admission Portal</h1>
+  </header>
+
+  <main class="container pb-5">
+    <div class="alert d-none" id="responseMessage" role="alert"></div>
+
+    <form id="admissionForm" class="needs-validation" novalidate enctype="multipart/form-data">
+      <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">Personal Details</div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title *</label>
+            <select class="form-select" name="title" id="title" required>
+              <option value="">Select</option>
+              <option>Mr.</option>
+              <option>Mrs.</option>
+            </select>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <input type="text" class="form-control" name="first_name" placeholder="First Name" required>
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" name="middle_name" placeholder="Middle Name" required>
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
+            </div>
+          </div>
+          <input type="text" class="form-control mb-3" id="full_name" name="full_name" placeholder="Full Name (Auto)" readonly required>
+          <input type="text" class="form-control mb-3" id="mother_name" name="mother_name" placeholder="Mother's Name" required>
+          <select class="form-select mb-3" name="gender" required>
+            <option value="">Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">Address</div>
+        <div class="card-body">
+          <textarea class="form-control mb-3" name="address" placeholder="Address" required></textarea>
+          <div class="row mb-3">
+            <div class="col"><input type="text" class="form-control" name="taluka" placeholder="Taluka" required></div>
+            <div class="col"><input type="text" class="form-control" name="district" placeholder="District" required></div>
+            <div class="col"><input type="text" class="form-control" name="pincode" placeholder="Pin Code" required pattern="\d{6}"></div>
+            <div class="col"><input type="text" class="form-control" name="state" placeholder="State" required></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">Contact Information</div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col"><input type="text" class="form-control" name="mobile" placeholder="Mobile (10 digits)" required pattern="[0-9]{10}"></div>
+            <div class="col"><input type="email" class="form-control" name="email" placeholder="Email" required></div>
+            <div class="col"><input type="text" class="form-control" name="aadhaar" placeholder="Aadhaar Number" required pattern="\d{12}"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">Demographics</div>
+        <div class="card-body">
+          <div class="row mb-3">
+            DOB:<div class="col"><input type="date" class="form-control" name="dob" id="dob" required></div>
+            Your age is:<div class="col"><input type="text" class="form-control" name="age" id="age" placeholder="Age (Auto)" readonly required></div>
+          </div>
+          Religion:<select class="form-select mb-3" id="religion" name="religion" required>
+            <option value="">Select Religion</option>
+            <option>Hindu</option><option>Muslim</option><option>Christian</option><option>Sikh</option><option>Jain</option>
+          </select>
+          Cast:<select class="form-select mb-3" name="caste" required>
+            <option value="">Select Caste</option>
+            <option>maratha</option><option>kumbhi</option><option>bhahmen</option><option>Sikh</option><option>Jain</option>
+          </select>
+          Category:<select class="form-select mb-3" id="caste_category" name="caste_category" required>
+            <option value="">Caste Category</option>
+            <option>General</option>
+            <option>OBC</option>
+            <option>SC</option>
+            <option>ST</option>
+          </select>
+           Physically Handicapped?:<div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="physically_handicapped" id="ph_no" value="No" required>
+            <label class="form-check-label" for="ph_no">No</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="physically_handicapped" id="ph_yes" value="Yes" required>
+            <label class="form-check-label" for="ph_yes">Yes</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header bg-secondary text-white">Documents Upload</div>
+        <div class="card-body">
+          <div class="mb-3">Enter Photo:<input type="file" class="form-control" id="photo" name="photo" required accept=".jpg,.jpeg,.png"></div>
+          <div class="mb-3">Enter Signature:<input type="file" class="form-control" id="signature" name="signature" required accept=".jpg,.jpeg,.png"></div>
+          <div class="mb-3">Enter Marksheet:<input type="file" class="form-control" id="marksheet" name="marksheet" required accept=".jpg,.jpeg,.png"></div>
+          <div class="mb-3">Enter Caste Certificate:<input type="file" class="form-control" id="caste_certificate" name="caste_certificate" accept=".jpg,.jpeg,.png,.pdf"></div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-success btn-lg px-5">Submit Admission</button>
+        <button type="button" id="goToReportBtn" class="btn btn-outline-secondary btn-lg ms-3">View Report</button>
+      </div>
+
+    </form>
+  </main>
+
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    &copy; 2025 Student Admission Portal. All rights reserved.
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+    $(document).ready(() => {
+      $('#religion, #caste_category').select2();
+
+      const validateFileInput = (fileInput, allowedTypes) => {
+        const file = fileInput.files[0];
+        if (!file) return;
+        const fileType = file.type;
+        if (!allowedTypes.includes(fileType)) {
+          alert("Invalid file type.");
+          fileInput.value = "";
+        }
+      };
+
+      ['photo', 'signature', 'marksheet', 'caste_certificate'].forEach(id => {
+        document.getElementById(id).addEventListener('change', function () {
+          const allowed = id === 'caste_certificate' ? ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] : ['image/jpeg', 'image/jpg', 'image/png'];
+          validateFileInput(this, allowed);
+        });
+      });
+
+      ['first_name', 'middle_name', 'last_name'].forEach(name => {
+        document.querySelector(`[name="${name}"]`).addEventListener('input', () => {
+          const first = document.querySelector('[name="first_name"]').value;
+          const middle = document.querySelector('[name="middle_name"]').value;
+          const last = document.querySelector('[name="last_name"]').value;
+          document.getElementById('full_name').value = [first, middle, last].join(' ').trim();
+        });
+      });
+
+      document.getElementById('dob').addEventListener('change', () => {
+        const dob = new Date(document.getElementById('dob').value);
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        if (today.getMonth() < dob.getMonth() || (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate())) {
+          age--;
+        }
+        document.getElementById('age').value = age;
+      });
+
+      document.getElementById('admissionForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        try {
+          const res = await fetch('/admission', {
+            method: 'POST',
+            body: formData
+          });
+          const data = await res.json();
+          const messageDiv = document.getElementById('responseMessage');
+          messageDiv.classList.remove('d-none', 'alert-danger');
+          messageDiv.classList.add('alert-success');
+          messageDiv.textContent = data.message;
+          this.reset();
+        } catch (err) {
+          const messageDiv = document.getElementById('responseMessage');
+          messageDiv.classList.remove('d-none', 'alert-success');
+          messageDiv.classList.add('alert-danger');
+          messageDiv.textContent = 'Submission failed. Please try again.';
+        }
+      });
+
+      document.getElementById('goToReportBtn').addEventListener('click', () => {
+        window.location.href = 'report.html';
+      });
+    });
+  </script>
+</body>
+</html>

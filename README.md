@@ -68,6 +68,13 @@ http://localhost:3000
 - Server: [http://localhost:3000](http://localhost:3000)
 
 ---
+---
+
+### 🔐 For live demo
+
+- Website: https://admission-management-system-beige.vercel.app/
+
+---
 
 ### 📸 Screenshots (optional)
 
@@ -79,3 +86,4 @@ http://localhost:3000
 
 **SEED – SETTribe Assignment**  
 © 2025 Admission System. All rights reserved.
+

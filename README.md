@@ -84,6 +84,7 @@ http://localhost:3000
 
 ### 👨‍💼 Developed By
 
-**SEED – SETTribe Assignment**  
+**Omkar Shejul**  
 © 2025 Admission System. All rights reserved.
+
 

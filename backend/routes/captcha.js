@@ -1,7 +1,7 @@
 const express = require('express');
 const svgCaptcha = require('svg-captcha');
 const router = express.Router();
-
+const captchaStore = require('./captchaStore');
 // Temporary store (better: Redis / session use karo)
 const captchaStore = {};
 

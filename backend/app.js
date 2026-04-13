@@ -12,6 +12,13 @@ app.use(cors({ origin: 'http://127.0.0.1:3001' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ✅ ADDITION: Extra CORS safety (important for captcha issues)
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  next();
+});
+
 // 🌐 Serve frontend static files from 'frontend/pages' folder
 const frontendPagesPath = path.join(__dirname, '../frontend/pages');
 app.use(express.static(frontendPagesPath));
@@ -41,11 +48,19 @@ const loginRoute = require('./routes/login');
 const captchaRoute = require('./routes/captcha');
 const admissionRoute = require('./routes/admission');
 
+// ✅ ADDITION: Debug log (routes loaded)
+console.log('✅ Routes Loaded: register, login, captcha, admission');
+
 // 🔗 Mount API routes
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/captcha', captchaRoute);
 app.use('/admission', admissionRoute);
+
+// ✅ ADDITION: Test route (for debugging server quickly)
+app.get('/test', (req, res) => {
+  res.send('Server is working fine ✅');
+});
 
 // ✍️ Admission form submission with files
 app.post('/admission', upload.fields([
@@ -112,7 +127,13 @@ app.post('/admission', upload.fields([
 // 🚀 Start server
 app.listen(3000, () => {
   console.log('✅ Server running at http://localhost:3000');
-  console.log('🏠 Home: http://localhost:3000/');             // serves index.html in frontend/pages
-  console.log('🔐 Login: http://localhost:3000/login.html');  // direct access
-  console.log('📝 Register: http://localhost:3000/register.html'); // direct access
+  console.log('🏠 Home: http://localhost:3000/');
+  console.log('🔐 Login: http://localhost:3000/login.html');
+  console.log('📝 Register: http://localhost:3000/register.html');
+
+  // ✅ ADDITION: Captcha debug
+  console.log('🔢 Captcha API: http://localhost:3000/captcha');
+
+  // ✅ ADDITION: Test route debug
+  console.log('🧪 Test API: http://localhost:3000/test');
 });

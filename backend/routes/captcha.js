@@ -2,32 +2,33 @@ const express = require('express');
 const svgCaptcha = require('svg-captcha');
 const router = express.Router();
 
-// Store the captcha token temporarily (in-memory for this example)
-let captchaToken = null;
+// Temporary store (better: Redis / session use karo)
+const captchaStore = {};
 
-// Route to generate captcha
 router.get('/', (req, res) => {
   const captcha = svgCaptcha.create();
-  captchaToken = captcha.text; // Store the captcha text for verification later
+  const token = Date.now().toString();
+
+  captchaStore[token] = captcha.text;
+
   res.json({
-    token: captchaToken,
-    captcha: captcha.data,  // Return the SVG captcha image
+    token,
+    captcha: captcha.data
   });
 });
 
-// Route to verify captcha
 router.post('/verify', (req, res) => {
   const { userInput, token } = req.body;
 
-  if (!userInput || !token) {
-    return res.status(400).json({ message: 'Captcha input or token is missing' });
+  if (!captchaStore[token]) {
+    return res.status(400).json({ message: 'Invalid or expired captcha' });
   }
 
-  // Compare the user input with the generated token
-  if (userInput === captchaToken) {
+  if (userInput === captchaStore[token]) {
+    delete captchaStore[token]; // cleanup
     return res.json({ message: 'Captcha verified successfully' });
   } else {
-    return res.status(400).json({ message: 'Captcha verification failed' });
+    return res.status(400).json({ message: 'Captcha incorrect' });
   }
 });
 
